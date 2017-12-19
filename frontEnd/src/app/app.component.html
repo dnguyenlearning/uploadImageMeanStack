@@ -1,0 +1,29 @@
+<label class="fileContainer">
+  Upload Your Image!
+  <input type="file" multiple class="custom-file-input" (change)="fileChangeEvent($event)" placeholder="Upload file..." />
+</label>
+
+
+<button type="button" [disabled]="imgPreview.length == 0 || imgPreview.length > 3 || errSize " (click)="upload()">Upload</button>
+
+<p *ngIf="imgPreview.length > 3"> maximun is 3 pictures </p>
+<p *ngIf="errSize"> maximun Size is 100kb</p>
+<div id="preview">
+  <div *ngFor="let image of imgPreview; let i=index;" class="imageUpload">
+    <img [src]="image.src" [class.err]="i==positionErr && errSize" alt="">
+    <span  (click)="deleteImage(image)">
+      <i class="fa fa-times" aria-hidden="true"></i>
+    </span>
+  </div>
+</div>
+
+
+<div class="posts">
+  <h2>POSTs</h2>
+  <div class="post" *ngFor="let post of posts">
+    <h2>{{post._id}}</h2>
+    <p>{{post.postId}}</p>
+    <img *ngFor="let src of post.link" class="imgPost" [src]="src" alt="">
+  </div>
+</div>
+
